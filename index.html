@@ -1,25 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Simple Markdown Blog</title>
-<link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Markdown Blog</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<h1>My Markdown Blog</h1>
+  <header>
+    <h1>My Markdown Blog</h1>
+  </header>
 
-<section id="post-list">
-  <!-- Posts list will be rendered here -->
-</section>
+  <main>
+    <nav id="post-list" aria-label="Blog posts">
+      <!-- Posts list will be rendered here -->
+    </nav>
 
-<section id="post-content">
-  <p>Select a post to read...</p>
-</section>
+    <article id="post-content" tabindex="0">
+      <section class="intro">
+        <h2>Welcome!</h2>
+        <p>Hi, I’m [Your Name], a passionate developer and writer.</p>
+        <p>This is my minimalist markdown blog. Click any post on the left to get started.</p>
+      </section>
+    </article>
+  </main>
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>

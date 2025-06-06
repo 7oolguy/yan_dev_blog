@@ -1,0 +1,132 @@
+/* Import Tailwind CSS for utility classes */
+@import url("https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css");
+
+/* Custom CSS to ensure Inter font is the base for body and some elements */
+body {
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
+  /* Tailwind's max-width, margin auto, padding handled in HTML */
+  /* background and color transitions handled by Tailwind dark classes */
+}
+
+/* Specific styling for the prose content within articles (from post.html) */
+/* The @tailwindcss/typography plugin would be ideal here if using a build system */
+/* For plain CSS, we manually apply some common prose styles */
+.prose h1 {
+  font-size: 2.5rem; /* ~40px */
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #1a202c; /* dark gray */
+}
+
+.dark .prose h1 {
+  color: #cbd5e0; /* light gray for dark mode */
+}
+
+.prose h2 {
+  font-size: 2rem; /* ~32px */
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #2d3748; /* slightly lighter dark gray */
+}
+
+.dark .prose h2 {
+  color: #e2e8f0; /* even lighter gray for dark mode */
+}
+
+.prose h3 {
+  font-size: 1.75rem; /* ~28px */
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #4a5568; /* medium dark gray */
+}
+
+.dark .prose h3 {
+  color: #edf2f7; /* almost white for dark mode */
+}
+
+.prose p {
+  margin-bottom: 1rem;
+}
+
+.prose a {
+  color: #3b82f6; /* blue-500 */
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.prose a:hover {
+  color: #2563eb; /* blue-600 */
+  text-decoration: underline;
+}
+
+.prose ul,
+.prose ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose ul li {
+  list-style-type: disc;
+}
+
+.prose ol li {
+  list-style-type: decimal;
+}
+
+.prose pre {
+  background-color: #e2e8f0; /* gray-200 */
+  padding: 1rem;
+  border-radius: 0.5rem; /* rounded-lg */
+  overflow-x: auto; /* Enable horizontal scrolling for long code lines */
+  font-family: "Roboto Mono", monospace; /* Monospace font for code */
+  font-size: 0.875rem; /* text-sm */
+  line-height: 1.5;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dark .prose pre {
+  background-color: #1a202c; /* gray-900 */
+  color: #e2e8f0; /* gray-200 */
+}
+
+.prose code {
+  font-family: "Roboto Mono", monospace;
+  background-color: #edf2f7; /* gray-100 */
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem; /* rounded */
+  font-size: 0.875rem; /* text-sm */
+  color: #c05621; /* orange-700 */
+}
+
+.dark .prose code {
+  background-color: #2d3748; /* gray-800 */
+  color: #f6ad55; /* orange-300 */
+}
+
+.prose blockquote {
+  border-left: 0.25rem solid #a0aec0; /* gray-400 */
+  padding-left: 1rem;
+  margin-left: 0;
+  font-style: italic;
+  color: #718096; /* gray-500 */
+}
+
+.dark .prose blockquote {
+  border-color: #4a5568; /* gray-700 */
+  color: #a0aec0; /* gray-400 */
+}
+
+/* Base font for the body, using Inter for general text */
+.font-inter {
+  font-family: "Inter", sans-serif;
+}
+
+/* Monospace font specifically for code snippets */
+.font-mono {
+  font-family: "Roboto Mono", monospace;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading Post</title>
+    <link rel="stylesheet" href="assets/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Georgia:wght@400;700&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+    <!-- Link to the marked.js library for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body class="font-inter bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Header section for navigation back to home -->
+    <header class="bg-blue-600 dark:bg-blue-800 text-white p-6 shadow-md rounded-b-lg">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="hover:underline text-lg">&leftarrow; Back to Home</a>
+            <a href="#" id="theme-toggle-post" class="hover:underline text-lg">Toggle Theme</a>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-6 mt-8">
+        <!-- Article section where Markdown content will be loaded and rendered -->
+        <article id="content" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md prose dark:prose-invert max-w-none">
+            <!-- Initial loading message, replaced by actual content -->
+            Loading...
+        </article>
+    </main>
+
+    <!-- Footer section -->
+    <footer class="mt-12 p-6 text-center text-gray-600 dark:text-gray-400">
+        <p>&copy; 2025 My Dev Blog. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript to fetch and render the Markdown file -->
+    <script>
+        // Get URL parameters to identify which Markdown file to load.
+        const params = new URLSearchParams(window.location.search);
+        const file = params.get("file"); // Get the value of the 'file' parameter.
+
+        // Get the article content container.
+        const contentContainer = document.getElementById("content");
+
+        // Check if a file parameter was provided in the URL.
+        if (!file) {
+            // If no file is specified, display an error message.
+            contentContainer.innerHTML = "<p>No post specified. Please return to the <a href='index.html'>homepage</a>.</p>";
+        } else {
+            // If a file is specified, attempt to fetch it from the /posts directory.
+            fetch(`posts/${file}`)
+                .then(res => {
+                    // Check if the response was successful (e.g., HTTP status 200 OK).
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! status: ${res.status}`);
+                    }
+                    // Parse the response body as plain text (the Markdown content).
+                    return res.text();
+                })
+                .then(md => {
+                    // Use marked.js to parse the Markdown text into HTML.
+                    // The marked.js library was loaded via a CDN in the <head>.
+                    contentContainer.innerHTML = marked.parse(md);
+                })
+                .catch(err => {
+                    // Catch any errors during the fetch or parsing process.
+                    console.error("Error loading post:", err);
+                    contentContainer.innerHTML = `<p>Error loading post: ${err.message}. Please check the file path and content.</p>`;
+                });
+        }
+
+        // Theme Toggle functionality for the post page
+        const themeTogglePost = document.getElementById('theme-toggle-post');
+        const htmlElement = document.documentElement;
+
+        // Ensure theme is consistent when navigating to post page
+        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (currentTheme === 'dark') {
+            htmlElement.classList.add('dark');
+        }
+
+        themeTogglePost.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  background: #f9f9f9;
+  color: #333;
+}
+h1,
+h2 {
+  color: #2c3e50;
+}
+#post-list {
+  margin-bottom: 2rem;
+}
+#post-list button {
+  display: block;
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  background: #3498db;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: left;
+}
+#post-list button:hover {
+  background: #2980b9;
+}
+#post-content {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+}
+pre {
+  background: #eee;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+a {
+  color: #3498db;
+}

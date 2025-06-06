@@ -1,0 +1,4 @@
+[
+  { "title": "Hello World", "file": "posts/hello-world.md" },
+  { "title": "My Second Post", "file": "posts/second-post.md" }
+]

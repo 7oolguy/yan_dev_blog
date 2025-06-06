@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simple Markdown Blog</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    background: #f9f9f9;
+    color: #333;
+  }
+  h1, h2 {
+    color: #2c3e50;
+  }
+  #post-list {
+    margin-bottom: 2rem;
+  }
+  #post-list button {
+    display: block;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background: #3498db;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: left;
+  }
+  #post-list button:hover {
+    background: #2980b9;
+  }
+  #post-content {
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+  }
+  pre {
+    background: #eee;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+  a {
+    color: #3498db;
+  }
+</style>
+</head>
+<body>
+
+<h1>My Markdown Blog</h1>
+
+<section id="post-list">
+  <h2>Posts</h2>
+  <!-- Post buttons will be added here -->
+</section>
+
+<section id="post-content">
+  <p>Select a post to read...</p>
+</section>
+
+<!-- Marked.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  // List your Markdown files here (name: filename)
+  const posts = {
+    "Hello World": "posts/hello-world.md",
+    "My Second Post": "posts/second-post.md"
+  };
+
+  const postListElem = document.getElementById("post-list");
+  const postContentElem = document.getElementById("post-content");
+
+  // Create post buttons
+  function createPostButtons() {
+    for (const [title, file] of Object.entries(posts)) {
+      const btn = document.createElement("button");
+      btn.textContent = title;
+      btn.addEventListener("click", () => loadPost(file));
+      postListElem.appendChild(btn);
+    }
+  }
+
+  // Load and render Markdown post
+  async function loadPost(url) {
+    postContentElem.innerHTML = "<p>Loading...</p>";
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Post not found");
+      const md = await res.text();
+      postContentElem.innerHTML = marked.parse(md);
+      window.scrollTo(0, 0);
+    } catch (err) {
+      postContentElem.innerHTML = `<p style="color:red;">Error loading post: ${err.message}</p>`;
+    }
+  }
+
+  createPostButtons();
+</script>
+
+</body>
+</html>
